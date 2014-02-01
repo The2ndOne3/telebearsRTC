@@ -27,7 +27,7 @@ module.exports = function(app){
       }
     });
   });
-  app.get('/:id(\\d+)/', function(req, res) {
+  app.get('/:id', function(req, res) {
     var id = req.params.id.toUpperCase();
     var breadcrumbs = [{href: id, val: id}];
 

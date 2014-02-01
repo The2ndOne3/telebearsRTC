@@ -44,6 +44,20 @@ if('production' == app.get('env')){
 
 var url = require('url');
 
+app.use(app.router);
+app.get('/about', function(req, res){
+  console.log('about triggered');
+  res.render('about', {
+    title: 'About',
+    semester: process.env.ENROLLMENT_PERIOD || 'Spring 2014'
+  });
+});
+app.get('/contact', function(req, res){
+  res.render('contact', {
+    title: 'Contact'
+  });
+});
+
 app.use(enrouten({
   directory: 'controllers'
 }));
