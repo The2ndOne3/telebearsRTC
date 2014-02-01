@@ -63,7 +63,7 @@ if('production' == app.get('env')){
     }
     else{
       console.error('[ORBIT ERR]', err);
-      res.status(500).render('404', {code: 500});
+      res.status(500).render('500', {code: 500, title: 'Errorrrrrrrr'});
     }
   });
 } else {

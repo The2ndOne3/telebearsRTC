@@ -1,10 +1,3 @@
-var mongojs = require('mongojs');
-if(process.env.MONGOHQ_URL)
-  var mongourl = process.env.MONGOHQ_URL
-else
-  var mongourl = 'mydb';
-var db = mongojs(mongourl, ['departments']);
-
 var cheerio = require('cheerio')
   , request = require('request')
   , semester = process.env.SEMESTER
@@ -100,51 +93,6 @@ module.exports = function(app){
     load_enrollment_data(ccn, function(result) {
       res.set('Cache-Control','private');
       res.json(result);
-    });
-  });
-  app.get('/api/autocomplete', function(req, res) {
-    var result = [];
-    db.departments.find().sort({name: 1}, function(err, data) {
-      if(err || !data) console.log('DB error');
-      else {
-        for(var i = 0; i < data.length; i++) {
-          var abb = data[i].abbreviation;
-          var aliases = { 'BIO ENG': 'BIOE',
-                      'CHM ENG': 'CHEME',
-                      'CIV ENG': 'CEE',
-                      'COMPSCI': 'CS',
-                      'EL ENG': 'EE',
-                      'ENGIN': 'E',
-                      'IND ENG': 'IEOR',
-                      'INTEGBI': 'IB',
-                      'MAT SCI': 'MSE',
-                      'MEC ENG': 'ME',
-                      'MCELLBI': 'MCB',
-                      'NWMEDIA': 'CNM',
-                      'NUC ENG': 'NUCE',
-                      'NUSCTX': 'NST',
-                      'STAT': 'STATS' };
-          if(abb in aliases) {
-            result.push(aliases[abb]);
-            for(var j = 0; j < data[i].courses.length; j++) {
-              var alias_datum = {};
-              var alias_course = aliases[abb] + ' ' + data[i].courses[j].course;
-              alias_datum.value = alias_course;
-              alias_datum.tokens = alias_course.split(' ');
-              result.push(alias_datum);
-            }
-          }
-          result.push(abb);
-          for(var j = 0; j < data[i].courses.length; j++) {
-            var datum = {};
-            var course = abb + ' ' + data[i].courses[j].course;
-            datum.value = course;
-            datum.tokens = course.split(' ');
-            result.push(datum);
-          }
-        }
-        res.json(result);
-      }
     });
   });
 };
