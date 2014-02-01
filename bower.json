@@ -5,6 +5,7 @@
     "foundation": "*",
     "font-awesome": "*",
 
-    "angular-latest":"*"
+    "angular-latest": "*",
+    "typeahead.js": "*"
   }
 }

@@ -46,7 +46,6 @@ var url = require('url');
 
 app.use(app.router);
 app.get('/about', function(req, res){
-  console.log('about triggered');
   res.render('about', {
     title: 'About',
     semester: process.env.ENROLLMENT_PERIOD || 'Spring 2014'
