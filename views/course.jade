@@ -4,7 +4,7 @@ block content
   .row(ng-controller="DataCtrl" ng-init="init('#{id}','#{course}')")
     .large-12.columns
       .controls(ng-show="loading")
-        | Loading sections ... 
+        | Loading sections ...
         i.fa.fa-spinner.fa-spin
       .controls(ng-cloak, ng-hide="loading")
         a.button.tiny(ng-click="loadAllData()")
