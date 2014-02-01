@@ -72,7 +72,7 @@ app.controller('DataCtrl', function($scope, $http) {
       .error(function(data) {
         console.log('Error: ' + data);
       });
-  }
+  };
 
   $scope.loadAllData = function() {
     angular.forEach($scope.sections, function(section, key) {
@@ -102,7 +102,7 @@ app.controller('DataCtrl', function($scope, $http) {
       .error(function(data) {
         console.log('Error: ' + data);
       });
-  }
+  };
 
   $scope.toggleHide = function() {
     angular.forEach($scope.sections, function(section, key) {
@@ -110,5 +110,5 @@ app.controller('DataCtrl', function($scope, $http) {
         section.hide = !$scope.hide;
       }
     });
-  }
+  };
 });

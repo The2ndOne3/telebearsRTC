@@ -1,0 +1,16 @@
+{
+    "browser": true,
+
+    "jquery": true,
+    "prototypejs": false,
+    "mootools": false,
+    "dojo": false,
+
+    "es5": true,
+
+    "curly": true,
+    "immed": true,
+    "undef": true,
+
+    "predef": ["angular", "console"]
+}

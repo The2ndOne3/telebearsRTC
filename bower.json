@@ -1,0 +1,10 @@
+{
+  "name": "telebears-rtc",
+  "version": "1.0.2",
+  "dependencies": {
+    "foundation": "*",
+    "font-awesome": "*",
+
+    "angular-latest":"*"
+  }
+}
