@@ -59,11 +59,11 @@ app.use(function(req, res, next){
 if('production' == app.get('env')){
   app.use(function(err, req, res, next){
     if(err.message.indexOf('Failed to lookup view') != -1 && err.view){
-      res.status(404).render('errors/404', {code: 404});
+      res.status(404).render('404', {code: 404, title: 'Errorrrrrrrr'});
     }
     else{
       console.error('[ORBIT ERR]', err);
-      res.status(500).render('errors/500', {code: 500});
+      res.status(500).render('404', {code: 500});
     }
   });
 } else {
@@ -71,17 +71,3 @@ if('production' == app.get('env')){
 }
 
 module.exports = app;
-
-app.get('/api/sections/:id/:course', require('./routes/api').sections);
-app.get('/api/enrollment/:ccn', require('./routes/api').enrollment);
-app.get('/api/autocomplete', routes.autocomplete);
-
-app.get('/search', routes.search);
-app.get('/about', function(req, res) { res.render('about', { title: 'About', semester: process.env.ENROLLMENT_PERIOD }) });
-app.get('/contact', function(req, res) { res.render('contact', { title: 'Contact'}) });
-
-app.get('/:id/:course', routes.course);
-app.get('/:id', routes.department);
-app.get('/', routes.index);
-
-app.get('*', function(req, res) { res.render('404', { title: 'Errorrrrrrrr'}); })

@@ -7,7 +7,7 @@ var mongojs = require('mongojs');
 if(process.env.MONGOHQ_URL)
   var mongourl = process.env.MONGOHQ_URL
 else
-  var mongourl = 'mydb';
+  var mongourl = 'telebearsRTC_larry';
 var db = mongojs(mongourl, ['departments']);
 
 

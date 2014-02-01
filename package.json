@@ -14,9 +14,6 @@
     "postinstall": "bower install",
     "test": "mocha --reporter spec"
   },
-  "scripts": {
-    "start": "node app.js"
-  },
   "dependencies": {
     "express": "*",
     "express-enrouten": "*",
