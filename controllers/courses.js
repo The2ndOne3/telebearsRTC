@@ -27,7 +27,7 @@ module.exports = function(app){
       }
     });
   });
-  app.get('/:id', function(req, res) {
+  app.get('/:id(\\d+)/', function(req, res) {
     var id = req.params.id.toUpperCase();
     var breadcrumbs = [{href: id, val: id}];
 
@@ -61,7 +61,7 @@ module.exports = function(app){
     });
   });
   app.get('/search', function(req, res) {
-    if(req.query.q == null){
+    if(!req.query.q){
       res.render('404', { title: 'Errorrrrrrrr'});
     }
     else {
@@ -103,11 +103,12 @@ module.exports = function(app){
             if(err || !data){
               console.log('DB error');
             }
-            else if (data.length == 0) {
+            else if (data.length === 0) {
               res.render('search', { title: 'Search results for \''+query+'\'', q: query });
             }
-            else
+            else{
               res.redirect('/'+encodeURIComponent(data[0].abbreviation.toLowerCase()));
+            }
           }
         );
       }
@@ -124,11 +125,12 @@ module.exports = function(app){
             if(err || !data){
               console.log('DB error');
             }
-            else if (data.length == 0) {
+            else if (data.length === 0) {
               res.render('search', { title: 'Search results for \''+query+'\'', q: query });
             }
-            else
+            else{
               res.redirect('/'+encodeURIComponent(data[0].abbreviation.toLowerCase())+'/'+course.toLowerCase());
+            }
           }
         );
       }
@@ -170,9 +172,9 @@ module.exports = function(app){
             }
           }
           result.push(abb);
-          for(var j = 0; j < data[i].courses.length; j++) {
+          for(var k = 0; k < data[i].courses.length; k++) {
             var datum = {};
-            var course = abb + ' ' + data[i].courses[j].course;
+            var course = abb + ' ' + data[i].courses[k].course;
             datum.value = course;
             datum.tokens = course.split(' ');
             result.push(datum);

@@ -67,7 +67,7 @@ var load_enrollment_data = function(ccn,callback) {
       enrollData.ccn = parseInt(ccn,10);
       enrollData.enroll = parseInt(textArray[0],10);
       enrollData.enrollLimit = parseInt(textArray[8],10);
-      if(textArray[21] != null) {
+      if(textArray[21]) {
         enrollData.waitlist = parseInt(textArray[10],10);
         enrollData.waitlistLimit = parseInt(textArray[21]);
       }
