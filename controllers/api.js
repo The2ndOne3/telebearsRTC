@@ -1,7 +1,8 @@
 var cheerio = require('cheerio')
   , request = require('request')
-  , semester = process.env.SEMESTER
-  , year = process.env.YEAR;
+  , config = require('../config')
+  , semester = config.semester
+  , year = config.year;
 
 var load_section_list = function(id, course, callback){
   var courses = []
