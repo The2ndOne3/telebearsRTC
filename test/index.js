@@ -27,7 +27,6 @@ describe('index', function () {
       .get('/')
       .expect(200)
       .expect('Content-Type', /html/)
-      .expect(/.*?Welcome to telebears-rtc.*? /)
       .end(function(err, res){
         if (err) {
           return done(err);
