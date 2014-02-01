@@ -11,8 +11,7 @@ var load_section_list = function(id, course, callback){
   request.get(url, function(error, res, body){
     if(!error && res.statusCode == 200){
       var $ = cheerio.load(body)
-        , end = $('table').length - 1
-        , index = 0;
+        , end = $('table').length - 1;
 
       $('table').slice(1,end).each(function(){
         var section = $(this).find('tr:nth-of-type(1) td:nth-of-type(3)').text().trim()
@@ -28,14 +27,12 @@ var load_section_list = function(id, course, callback){
           if(location != 'CANCELLED' && restrictions != 'CURRENTLY NOT OPEN'){
             var locationArray = location.split(', ');
             courses.push({
-              index: index,
               section: section_id,
               instructor: $(this).find('tr:nth-of-type(3) td:nth-of-type(2)').text(),
               time: locationArray[0],
               location: locationArray[1],
               ccn: $(this).find('input[name="_InField2"]').val()
             });
-            index++;
           }
         }
       });
