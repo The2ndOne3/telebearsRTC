@@ -36,6 +36,8 @@ app.get('/api/autocomplete', routes.autocomplete);
 app.get('/search', routes.search);
 app.get('/about', function(req, res) { res.render('about', { title: 'About', semester: process.env.ENROLLMENT_PERIOD }) });
 app.get('/contact', function(req, res) { res.render('contact', { title: 'Contact'}) });
+app.get('/login', function(req, res) { res.render('login', { title: 'Login'}) });
+app.get('/account', routes.account);
 
 app.get('/:id/:course', routes.course);
 app.get('/:id', routes.department);

@@ -16,6 +16,14 @@
   body {
     font-family: 'Roboto', sans-serif;
   }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: 'Roboto', sans-serif;
+  }
   a.logo {
     display: inherit;
     text-align: center;
@@ -51,7 +59,7 @@
     padding: 0;
   }
   .breadcrumbs>* {
-    font-size: 0.75rem;
+    font-size: 0.875rem;
   }
   .breadcrumbs>*:before {
     content: ">";
@@ -66,6 +74,9 @@
   }
   nav ul.breadcrumbs li:before {
     content: "|";
+  }
+  nav ul.breadcrumbs li i#login-icon {
+    padding-left: 0.25em;
   }
   form {
     margin: 1em 0 0 0;
@@ -159,6 +170,66 @@
     margin-bottom: 0.5rem;
     color: #025d8c;
   }
+  form#settings h6 {
+    margin-bottom: 1rem;
+  }
+  form#settings a {
+    font-size: 0.875em;
+  }
+  form#settings a i {
+    margin-left: 0.5em;
+  }
+  form#settings i.icon {
+    width: 26px;
+    text-align: center;
+    font-size: 1.125em;
+  }
+  form#settings hr {
+    margin: 0.25rem 0 0.5rem 0;
+  }
+  form#settings .detail {
+    width: 90%;
+    font-size: 0.75em;
+    color: #666;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    margin: 0;
+    height: 1rem;
+    padding-left: 0.75em;
+  }
+  form#settings .detail.editable {
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+    height: 2rem;
+  }
+  form#settings a.form-controls {
+    display: inline-block;
+    font-size: 0.75em;
+    padding: 0.75em;
+    margin: 1.25em 0.75em 0 0;
+    border-radius: 3px;
+  }
+  form#settings a.form-controls.done {
+    background: #024a70;
+    color: #fff;
+  }
+  form#settings a.form-controls.cancel {
+    background: #bbb;
+    color: #444;
+  }
+  li.subscribed {
+    padding: 10px;
+  }
+  li.subscribed i.fa-times-circle {
+    color: #ee4545;
+    font-size: 2em;
+  }
+  li.subscribed p {
+    font-size: 0.875em;
+    margin: 0;
+  }
   footer p {
     font-size: 0.75em;
     color: #666;
@@ -224,5 +295,15 @@
   }
   table tr.headings:hover {
     background: inherit;
+  }
+  li.subscribed i.fa-times-circle {
+    color: #999;
+    font-size: 1.25em;
+  }
+  li.subscribed:hover {
+    background: #ececec;
+  }
+  li.subscribed:hover i.fa-times-circle {
+    color: #ee4545;
   }
 }

@@ -78,7 +78,7 @@ exports.course = function(req, res) {
       res.render('404', { title: 'Errorrrrrrrr'});
     }
     else {
-      res.render('course', { title: title, breadcrumbs: breadcrumbs, id: id, course: course });
+      res.render('course', { title: title, breadcrumbs: breadcrumbs, id: id, course: course, angular: true });
     }
   });
 };
@@ -209,4 +209,15 @@ exports.autocomplete = function(req, res) {
       res.json(result);
     }
   });
+}
+
+/*
+ * GET user's account page only if authenticated
+ * Route: /account
+ */
+
+exports.account = function(req, res) {
+  // Do auth
+  title = 'Username'
+  res.render('account', { title: title, angular: true });
 }

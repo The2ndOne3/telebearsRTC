@@ -112,3 +112,85 @@ app.controller('DataCtrl', function($scope, $http) {
     });
   }
 });
+
+app.controller('AcctCtrl', function($scope, $http) {
+  $scope.noEmail = false;
+  $scope.noMobile = false;
+  $scope.editing = false;
+  $scope.saved = {};
+  $scope.noSubscriptions = false;
+
+  $scope.init = function(subscriptions, email, mobile) {
+    if(subscriptions.length == 0)
+      $scope.noSubscriptions = true;
+    else
+      $scope.subscriptions = subscriptions;
+    $scope.email = email;
+    $scope.mobile = mobile;
+
+    if(email == '')
+      $scope.noEmail = true;
+    if(mobile == '')
+      $scope.noMobile = true;
+
+
+    $scope.saved.email = email;
+    $scope.saved.mobile = mobile;
+    $scope.saved.noEmail = $scope.noEmail;
+    $scope.saved.noMobile = $scope.noMobile;
+  }
+
+  $scope.removeSection = function(ccn) {
+    angular.forEach($scope.subscriptions, function(subscription, key) {
+      if(subscription.ccn == ccn) {
+        // Remove from subscription db
+        subscription.hide = true;
+      }
+    });
+    $scope.noSubscriptions = true;
+    angular.forEach($scope.subscriptions, function(subscription, key) {
+      if(!subscription.hide) {
+        $scope.noSubscriptions = false;
+      }
+    });
+  }
+
+  $scope.startEditing = function() {
+    $scope.editing = true;
+  }
+
+  $scope.add = function(type) {
+    if(type == 'email')
+      $scope.noEmail = false;
+    if(type == 'mobile')
+      $scope.noMobile = false;
+  }
+
+  $scope.remove = function(type) {
+    if(type == 'email') {
+      $scope.email = '';
+      $scope.noEmail = true;
+    }
+    else if(type == 'mobile') {
+      $scope.mobile = '';
+      $scope.noMobile = true;
+    }
+  }
+
+  $scope.save = function() {
+    // insert query to save new settings
+    $scope.saved.email = $scope.email;
+    $scope.saved.mobile = $scope.mobile;
+    $scope.saved.noEmail = $scope.noEmail;
+    $scope.saved.noMobile = $scope.noMobile;
+    $scope.editing = false;
+  }
+
+  $scope.cancel = function() {
+    $scope.email = $scope.saved.email;
+    $scope.mobile = $scope.saved.mobile;
+    $scope.noEmail = $scope.saved.noEmail;
+    $scope.noMobile = $scope.saved.noMobile;
+    $scope.editing = false;
+  }
+});

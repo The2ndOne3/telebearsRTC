@@ -1,0 +1,41 @@
+extends layout
+
+block content
+  .row(ng-controller="AcctCtrl", ng-init="init([{title: 'Math 54',ccn:'12345'},{title: 'Math 54',ccn:'12346'}],'larry@larryxu.com','')")
+    .large-3.large-push-9.columns
+      .panel
+        form#settings
+          a(ng-hide="editing", ng-click="startEditing()").right Edit
+          h6 Notification Settings
+          i.fa.fa-envelope-o.icon
+          |  Email
+          hr
+          a.right(ng-show="editing && !noEmail", ng-click="remove('email')")
+            i.fa.fa-times-circle
+          input.detail(type="text", ng-show="!noEmail", ng-model="email", ng-disabled="!editing", ng-class="{editable: editing}")
+          a.right(ng-show="editing && noEmail", ng-click="add('email')")
+            i.fa.fa-plus
+          .detail(ng-show="noEmail") Not specified
+          br
+          i.fa.fa-mobile.icon
+          |  Text
+          hr
+          a.right(ng-show="editing && !noMobile", ng-click="remove('mobile')")
+            i.fa.fa-times-circle
+          input.detail(type="text", ng-show="!noMobile", ng-model="mobile", ng-disabled="!editing", ng-class="{editable: editing}")
+          a.right(ng-show="editing && noMobile", ng-click="add('mobile')")
+            i.fa.fa-plus
+          .detail(ng-show="noMobile") Not specified
+          a.form-controls.done(ng-show="editing", ng-click="save()") Done
+          a.form-controls.cancel(ng-show="editing", ng-click="cancel()") Cancel
+    .large-9.large-pull-3.columns
+      h4 Subscribed courses
+      //if no subscribed courses
+      .alert-box.info(ng-show="noSubscriptions") You are currently not subscribed to any courses. Search for courses that you want to receive enrollment updates on.
+      //else
+      ul.no-bullet
+        li.subscribed(ng-repeat="subscription in subscriptions", ng-hide="subscription.hide")
+          a.right(ng-click="removeSection(subscription.ccn)" title="Remove")
+            i.fa.fa-times-circle
+          h5 {{subscription.title}}
+          p {{subscription.ccn}}
