@@ -1,6 +1,9 @@
 if (!global.hasOwnProperty('db')) {
   var Sequelize = require('sequelize')
-    , sequelize = null;
+    , sequelize = null
+
+    , path = require('path')
+    , config = require(path.join('..', 'config'));
 
   if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     var match = process.env.HEROKU_POSTGRESQL_BRONZE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
@@ -13,21 +16,24 @@ if (!global.hasOwnProperty('db')) {
       logging:  true
     });
   } else {
-    sequelize = new Sequelize('example-app-db', 'root', null);
+    sequelize = new Sequelize('telebears-rtc', 'root', config.password);
   }
 
   global.db = {
     Sequelize: Sequelize,
     sequelize: sequelize,
-    User:      sequelize.import(__dirname + '/user')
 
-    // add your other models here
+    Department:   sequelize.import(__dirname + '/department'),
+    Course:   sequelize.import(__dirname + '/course'),
+    Section:   sequelize.import(__dirname + '/section'),
+    User:      sequelize.import(__dirname + '/user'),
   };
 
-  /*
-    Associations can be defined here. E.g. like this:
-    global.db.User.hasMany(global.db.SomethingElse)
-  */
+  global.db.Department.hasMany(global.db.Course);
+  global.db.Course.hasMany(global.db.Section);
+
+  global.db.Section.hasMany(global.db.User);
+  global.db.User.hasMany(global.db.Section);
 }
 
 module.exports = global.db;
