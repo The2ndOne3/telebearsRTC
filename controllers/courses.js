@@ -1,5 +1,5 @@
 var mongojs = require('mongojs');
-var db = mongojs(process.env.MONGOHQ_URL || 'telebearsRTC_larry', ['departments']);
+var db = mongojs(process.env.MONGOHQ_URL || 'telebearsRTC', ['departments']);
 
 module.exports = function(app){
   app.get('/', function(req, res) {
@@ -140,6 +140,12 @@ module.exports = function(app){
         }
         res.json(result);
       }
+    });
+  });
+
+  app.get('/account', function(req, res) {
+    res.render('account', {
+
     });
   });
 

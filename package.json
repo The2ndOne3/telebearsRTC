@@ -26,9 +26,15 @@
     "bower": "*",
     "nodemon": "*",
 
-    "mongoose": "*",
+    "passport": "*",
+    "sequelize": "*",
+    "pg": "*",
+    "mongojs": "*",
+
     "cheerio": "*",
-    "request": "*"
+    "request": "*",
+
+    "onceler": "*"
   },
   "devDependencies": {
     "mocha": "*",
@@ -44,6 +50,6 @@
     "grunt-copy-to": "*"
   },
   "engines": {
-    "node": ">= 0.8.0"
+    "node": ">= 0.10.0"
   }
 }

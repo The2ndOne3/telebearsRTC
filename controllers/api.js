@@ -4,6 +4,11 @@ var cheerio = require('cheerio')
   , semester = config.semester
   , year = config.year;
 
+// id: department abbreviation
+// course: course number
+// callback: function(err, result){
+//  result is array of section objects
+// }
 var load_section_list = function(id, course, callback){
   var courses = []
     , url = 'http://osoc.berkeley.edu/OSOC/osoc?p_term=' + semester + '&p_course=' + course + '&p_dept=' + id;
@@ -44,6 +49,10 @@ var load_section_list = function(id, course, callback){
   });
 };
 
+// ccn: ccn
+// callback: function(err, result){
+//  result is data object
+// }
 var load_enrollment_data = function(ccn, callback){
   request.post('https://telebears.berkeley.edu/enrollment-osoc/osc',
     {
