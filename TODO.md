@@ -1,4 +1,5 @@
 * Figure out email/text confirmation
+* Add confirmation endpoints
 * Figure out alerts
 * Figure out phone number validation
 * Add subscribing endpoint

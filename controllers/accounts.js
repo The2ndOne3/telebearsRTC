@@ -29,7 +29,6 @@ module.exports = function(app) {
   app.post('/signup', function(req, res) {
     User.register(new User({
       username: req.body.username,
-      email: req.body.email,
       watching: []
     }), req.body.password, function(err, user) {
       console.log(err);
@@ -37,7 +36,9 @@ module.exports = function(app) {
         return res.render('login', {err: err.message});
       }
 
-      res.redirect('/account');
+      User.addEmail(req.body.email, function(err) {
+        res.redirect('/account');
+      });
     });
   });
 
@@ -53,22 +54,168 @@ module.exports = function(app) {
 
 
   app.post('/subscribe/:ccn', function(req, res) {
-    ;
+    if (!req.user) {
+      return res.send(403);
+    }
+
+    User.update({username: req.user.username}, {
+      $push: {
+        'watching': {
+          ccn: req.params.ccn,
+        }
+      }
+    }, function(err) {
+      if (err) {
+        console.error('[ERROR] User not updated:', req.user, err);
+        return res.send(500);
+      }
+
+      res.send(200, {
+        success: true
+      });
+    });
   });
 
   app.post('/unsubscribe/:ccn', function(req, res) {
-    ;
+    if (!req.user) {
+      return res.send(403);
+    }
+
+    User.update({username: req.user.username}, {
+      $pull: {
+        'watching': {
+          ccn: req.params.ccn,
+        }
+      }
+    }, function(err) {
+      if (err) {
+        console.error('[ERROR] User not updated:', req.user, err);
+        return res.send(500);
+      }
+
+      res.send(200, {
+        success: true
+      });
+    });
   });
 
   app.post('/account/:field/:value', function(req, res) {
-    ;
+    if (!req.user) {
+      return res.send(403);
+    }
+
+    User.find({username: req.user.username}, function(err, user) {
+      if (err) {
+        console.error('[ERROR] User not found:', req.user, err);
+        return res.send(500);
+      }
+
+      if (req.params.field == 'email') {
+        user.addEmail(req.params.value, function(err, result) {
+          if (err) {
+            console.error('[ERROR] User not updated:', req.user, err);
+            return res.send(500);
+          }
+
+          res.send(200, {
+            success: true
+          });
+        });
+      } else {
+        user.addPhone(req.params.value, function(err, result) {
+          if (err) {
+            console.error('[ERROR] User not updated:', req.user, err);
+            return res.send(500);
+          }
+
+          res.send(200, {
+            success: true
+          });
+        });
+      }
+    });
   });
 
   app.put('/account/:field/:value', function(req, res) {
-    ;
+    if (!req.user) {
+      return res.send(403);
+    }
+
+    User.find({username: req.user.username}, function(err, user) {
+      if (err) {
+        console.error('[ERROR] User not found:', req.user, err);
+        return res.send(500);
+      }
+
+      if (req.params.field == 'email') {
+        user.changeEmail(req.params.value, function(err, result) {
+          if (err) {
+            console.error('[ERROR] User not updated:', req.user, err);
+            return res.send(500);
+          }
+
+          res.send(200, {
+            success: true
+          });
+        });
+      } else {
+        user.changePhone(req.params.value, function(err, result) {
+          if (err) {
+            console.error('[ERROR] User not updated:', req.user, err);
+            return res.send(500);
+          }
+
+          res.send(200, {
+            success: true
+          });
+        });
+      }
+    });
   });
 
   app.delete('/account/:field/:value', function(req, res) {
+    if (!req.user) {
+      return res.send(403);
+    }
+
+    User.find({username: req.user.username}, function(err, user) {
+      if (err) {
+        console.error('[ERROR] User not found:', req.user, err);
+        return res.send(500);
+      }
+
+      if (req.params.field == 'email') {
+        user.removeEmail(req.params.value, function(err, result) {
+          if (err) {
+            console.error('[ERROR] User not updated:', req.user, err);
+            return res.send(500);
+          }
+
+          res.send(200, {
+            success: true
+          });
+        });
+      } else {
+        user.removePhone(req.params.value, function(err, result) {
+          if (err) {
+            console.error('[ERROR] User not updated:', req.user, err);
+            return res.send(500);
+          }
+
+          res.send(200, {
+            success: true
+          });
+        });
+      }
+    });
+  });
+
+
+  app.get('/confirm/email/:token', function(req, res) {
+    ;
+  });
+
+  app.get('/confirm/phone/:token', function(req, res) {
     ;
   });
 };
