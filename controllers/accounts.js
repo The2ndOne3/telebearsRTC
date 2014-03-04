@@ -33,7 +33,10 @@ module.exports = function(app) {
     }), req.body.password, function(err, user) {
       console.log(err);
       if (err) {
-        return res.render('login', {err: err.message});
+        return res.render('login', {
+          title: 'Login',
+          err: err.message
+        });
       }
 
       User.addEmail(req.body.email, function(err) {

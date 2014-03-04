@@ -3,7 +3,10 @@ html(class='no-js', lang='en', ng-app="enrollmentApp")
   head
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title= 'telebearsRTC - ' + title
+    if title
+      title= 'telebearsRTC - ' + title
+    else
+      title telebearsRTC
     link(rel='stylesheet', href='/stylesheets/normalize.css')
     link(rel='stylesheet', href='/stylesheets/foundation.min.css')
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
