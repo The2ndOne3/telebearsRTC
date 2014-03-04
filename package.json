@@ -20,6 +20,7 @@
 
     "express": "*",
     "express-enrouten": "*",
+    "connect-flash": "*",
     "helmet": "*",
 
     "jade": "*",

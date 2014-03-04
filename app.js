@@ -3,14 +3,24 @@ var express = require('express')
   , url = require('url')
 
   , enrouten = require('express-enrouten')
+  , flash = require('connect-flash')
   , helmet = require('helmet')
 
   , passport = require('.' + path.sep + path.join('lib', 'auth'))
+  , mongoose = require('mongoose')
   , RedisStore = require('connect-redis')(express)
 
   , jade = require('jade')
   , stylus = require('stylus')
   , nib = require('nib');
+
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/telebearsRTC', {
+  server: {
+    socketOptions: {
+      keepAlive: 1
+    }
+  }
+});
 
 var app = express();
 app.set('port', process.env.PORT || 3000);
@@ -65,6 +75,8 @@ app.use(express.session({
     pass: redis_auth[1]
   })
 }));
+
+app.use(flash());
 
 app.use(passport.initialize());
 app.use(passport.session());

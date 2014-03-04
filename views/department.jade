@@ -11,13 +11,13 @@ block content
       ul.no-bullet
         - for (var i = 0; i < half_length; i++)
           li.listing
-            a(href=encodeURIComponent(id.toLowerCase())+'/'+courses[i].course.toLowerCase())
-              strong.larger #{id} #{courses[i].course}
-              .name #{courses[i].title}
+            a(href=encodeURIComponent(locals.id.toLowerCase()) + '/' + locals.courses[i].number.toLowerCase())
+              strong.larger #{locals.id} #{locals.courses[i].number}
+              .name #{locals.courses[i].title}
     .large-6.columns
       ul.no-bullet
         - for (var i = half_length; i < length; i++)
           li.listing
-            a(href=encodeURIComponent(id.toLowerCase())+'/'+courses[i].course.toLowerCase())
-              strong.larger #{id} #{courses[i].course}
-              .name #{courses[i].title}
+            a(href=encodeURIComponent(locals.id.toLowerCase()) + '/' + locals.courses[i].number.toLowerCase())
+              strong.larger #{locals.id} #{locals.courses[i].number}
+              .name #{locals.courses[i].title}

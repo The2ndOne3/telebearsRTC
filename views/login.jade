@@ -7,21 +7,26 @@ block content
         .large-6.columns
           .panel
             h4 Login
-            form#login-form
-              label(for='username') Username
-              input#username(type='text', name='username')
+            form#login-form(method='post', action='/login')
+              label(for='email') Email
+              input#email(type='text', name='email')
               label(for='password') Password
               input#password(type='password', name='password')
               input.tiny.button(type='submit' value='Login')
             #result
         .large-6.columns.end
           h4 Need an account? Sign up here
-          form#signup-form
-            label(for='signup-username') Username
-            input#signup-username(type='text', name='signup-username')
+          form#signup-form(method='post', action='/signup')
+            label(for='name') Name
+            input#signup-name(type='text', name='name')
             label(for='email') Email
-            input#email(type='text', name='email')
-            label(for='signup-password') Password
-            input#signup-password(type='password', name='signup-password')
+            input#signup-email(type='text', name='email')
+            label(for='password') Password
+            input#signup-password(type='password', name='password')
             input.tiny.button(type='submit' value='Signup')
           #result
+      if locals.err.length > 0
+        .row
+          .large-12.columns
+            .alert-box.alert
+              p Oh no! #{locals.err}

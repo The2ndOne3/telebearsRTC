@@ -12,10 +12,9 @@ var userSchema = mongoose.Schema({
     email: Boolean
   },
 
-  // No need for email confirmation token -- email sends temporary password.
   confirmation: {
-    token: String,
-    expires: Date
+    email: String,
+    text: Date
   },
 
   watching: [{
