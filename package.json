@@ -27,12 +27,7 @@
     "nodemon": "*",
 
     "passport": "*",
-    "sequelize": "*",
-    "pg": "*",
-    "mongojs": "*",
-
-    "cheerio": "*",
-    "request": "*",
+    "mongoose": "*",
 
     "onceler": "*"
   },

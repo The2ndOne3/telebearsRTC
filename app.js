@@ -31,7 +31,6 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(require('stylus').middleware(__dirname + '/public'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(app.router);
 
 app.use(stylus.middleware({
   src: path.join(__dirname, 'public'),
