@@ -1,8 +1,9 @@
 var cheerio = require('cheerio')
   , request = require('request')
-  , config = require('../config')
-  , semester = config.semester
-  , year = config.year;
+
+  , config = process.env
+  , semester = config.SEMESTER
+  , year = config.YEAR;
 
 // id: department abbreviation
 // course: course number

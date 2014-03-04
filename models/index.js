@@ -3,7 +3,7 @@ if (!global.hasOwnProperty('db')) {
     , sequelize = null
 
     , path = require('path')
-    , config = require(path.join('..', 'config'));
+    , config = process.env;
 
   if (process.env.HEROKU_POSTGRESQL_BRONZE_URL) {
     var match = process.env.HEROKU_POSTGRESQL_BRONZE_URL.match(/postgres:\/\/([^:]+):([^@]+)@([^:]+):(\d+)\/(.+)/);
@@ -16,7 +16,7 @@ if (!global.hasOwnProperty('db')) {
       logging:  true
     });
   } else {
-    sequelize = new Sequelize('telebears-rtc', 'root', config.password);
+    sequelize = new Sequelize('telebears-rtc', 'root', config.LOCAL_PASSWORD);
   }
 
   global.db = {
