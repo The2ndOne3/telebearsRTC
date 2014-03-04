@@ -8,8 +8,8 @@ block content
           .panel
             h4 Login
             form#login-form(method='post', action='/login')
-              label(for='email') Email
-              input#email(type='text', name='email')
+              label(for='username') Username
+              input#username(type='text', name='username')
               label(for='password') Password
               input#password(type='password', name='password')
               input.tiny.button(type='submit' value='Login')
@@ -17,8 +17,8 @@ block content
         .large-6.columns.end
           h4 Need an account? Sign up here
           form#signup-form(method='post', action='/signup')
-            label(for='name') Name
-            input#signup-name(type='text', name='name')
+            label(for='username') Username
+            input#signup-username(type='text', name='username')
             label(for='email') Email
             input#signup-email(type='text', name='email')
             label(for='password') Password

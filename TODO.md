@@ -1,9 +1,9 @@
-* Clean up courses.js
-* Convert Mongo procedures into models
+* Figure out email/text confirmation
+* Figure out alerts
+* Figure out phone number validation
+* Add subscribing endpoint
+* Add update user info endpoint
+* Figure out polling
 
-* Add accounts
-* Add email alerts
-* Add texting alerts
-
-* Migrate to Bower assets
-* Add filter text input box on index
+* Fix login view
+* Fix layout top bar

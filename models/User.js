@@ -1,32 +1,44 @@
 var mongoose = require('mongoose');
 
 var userSchema = mongoose.Schema({
-  name: String,
+  username: String,
   password: String,
-  email: String,
+  emails: [{
+    address: String,
+    token: String,
+    confirmed: {
+      type: Boolean,
+      default: false
+    }
+  }],
 
-  phone: String,
+  phone: [{
+    number: String,
+    token: String,
+    confirmed: {
+      type: Boolean,
+      default: false
+    }
+  }],
 
   alerts: {
-    text: Boolean,
-    email: Boolean
-  },
-
-  confirmation: {
-    email: String,
-    text: Date
+    text: {
+      type: Boolean,
+      default: false
+    },
+    email: {
+      type: Boolean,
+      default: false
+    }
   },
 
   watching: [{
     ccn: String,
     title: String,
-    professor: String,
     time: String
   }]
 });
 
-userSchema.plugin(require('passport-local-mongoose'), {
-  usernameField: 'email'
-});
+userSchema.plugin(require('passport-local-mongoose'));
 
 module.exports = mongoose.model('User', userSchema);

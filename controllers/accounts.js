@@ -28,17 +28,19 @@ module.exports = function(app) {
 
   app.post('/signup', function(req, res) {
     User.register(new User({
-      name: req.body.name,
+      username: req.body.username,
       email: req.body.email,
       watching: []
     }), req.body.password, function(err, user) {
+      console.log(err);
       if (err) {
-        return res.render('/login', {err: err});
+        return res.render('login', {err: err.message});
       }
 
       res.redirect('/account');
     });
   });
+
 
   app.get('/account', function(req, res) {
     if (!req.user) {
@@ -49,7 +51,24 @@ module.exports = function(app) {
     });
   });
 
-  app.get('/subscribe/:ccn', function(req, res) {
+
+  app.post('/subscribe/:ccn', function(req, res) {
+    ;
+  });
+
+  app.post('/unsubscribe/:ccn', function(req, res) {
+    ;
+  });
+
+  app.post('/account/:field/:value', function(req, res) {
+    ;
+  });
+
+  app.put('/account/:field/:value', function(req, res) {
+    ;
+  });
+
+  app.delete('/account/:field/:value', function(req, res) {
     ;
   });
 };
