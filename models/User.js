@@ -1,11 +1,10 @@
 var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/telebearsRTC');
 
-var departmentSchema = mongoose.Schema({
+var userSchema = mongoose.Schema({
   name: String,
   password: String,
-
   email: String,
+
   phone: String,
 
   alerts: {
@@ -13,6 +12,7 @@ var departmentSchema = mongoose.Schema({
     email: Boolean
   },
 
+  // No need for email confirmation token -- email sends temporary password.
   confirmation: {
     token: String,
     expires: Date
@@ -25,3 +25,9 @@ var departmentSchema = mongoose.Schema({
     time: String
   }]
 });
+
+userSchema.plugin(require('passport-local-mongoose'), {
+  usernameField: 'email'
+});
+
+module.exports = mongoose.model('User', userSchema);

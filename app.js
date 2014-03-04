@@ -1,8 +1,12 @@
 var express = require('express')
   , path = require('path')
+  , url = require('url')
 
   , enrouten = require('express-enrouten')
   , helmet = require('helmet')
+
+  , passport = require('.' + path.sep + path.join('lib', 'auth'))
+  , RedisStore = require('connect-redis')(express)
 
   , jade = require('jade')
   , stylus = require('stylus')
@@ -48,7 +52,22 @@ if('production' == app.get('env')){
   app.use(express.static(path.join(__dirname, 'public')));
 }
 
-var url = require('url');
+var redis_url = url.parse(process.env.REDISTOGO_URL || 'redis://telebearsRTC:@127.0.0.1:6379')
+  , redis_auth = redis_url.auth.split(':');
+
+app.use(express.cookieParser());
+app.use(express.session({
+  secret: 'yellow colourblind submarine',
+  store: new RedisStore({
+    host: redis_url.hostname,
+    port: redis_url.port,
+    db: redis_auth[0],
+    pass: redis_auth[1]
+  })
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(app.router);
 app.get('/about', function(req, res){
