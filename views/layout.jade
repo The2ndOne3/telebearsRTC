@@ -9,7 +9,7 @@ html(class='no-js', lang='en', ng-app="enrollmentApp")
     link(rel='stylesheet', href='//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='/javascripts/vendor/custom.modernizr.js')
-    if course
+    if angular
       script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular.min.js')
       script(src='/javascripts/controller.js')
   body
@@ -36,6 +36,9 @@ html(class='no-js', lang='en', ng-app="enrollmentApp")
               a(href='/about') About
             li
               a(href='/contact') Contact
+            li
+              a(href='/login') Login 
+                i#login-icon.fa.fa-arrow-circle-right
         form#search-form(action='/search', method='get')
           .row.collapse
             .small-10.columns

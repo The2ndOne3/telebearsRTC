@@ -11,6 +11,9 @@ var express = require('express')
 var app = express();
 app.set('port', process.env.PORT || 3000);
 
+// all environments
+app.set('port', process.env.PORT || 3000);
+app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.set('views', path.join(__dirname, 'views'));
 
@@ -20,11 +23,15 @@ if('production' == app.get('env')){
 
 helmet.defaults(app);
 
+app.locals.pretty = true;
 app.use(express.logger('dev'));
 app.use(express.favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
+app.use(require('stylus').middleware(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(app.router);
 
 app.use(stylus.middleware({
   src: path.join(__dirname, 'public'),

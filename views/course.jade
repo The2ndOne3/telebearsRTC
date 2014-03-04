@@ -4,12 +4,12 @@ block content
   .row(ng-controller="DataCtrl" ng-init="init('#{id}','#{course}')")
     .large-12.columns
       .controls(ng-show="loading")
-        | Loading sections ...
+        | Loading sections ... 
         i.fa.fa-spinner.fa-spin
       .controls(ng-cloak, ng-hide="loading")
-        a.button.tiny(ng-click="loadAllData()")
-          i.fa.fa-refresh
-          | Load All Data
+        //- a.button.tiny(ng-click="loadAllData()")
+        //-   i.fa.fa-refresh
+        //-   | Load All Data
         a.button.tiny.right.dropdown.hide-for-large-up(data-dropdown="drop") Display
         br
         ul#drop.f-dropdown(data-dropdown-content)
@@ -56,5 +56,8 @@ block content
             td(ng-show="waitlist") {{section.waitlist}}
             td(ng-show="updated") {{section.date}}
             td
-              a(ng-click='loadData(section.index,section.ccn)', title="Update")
-                i.fa.fa-refresh(ng-class="{'fa-spin': section.loading}")
+              //- if user is subscribed
+              i.fa.fa-check
+              //- else
+              a(ng-click='loadData(section.index,section.ccn)', title="Subscribe")
+                i.fa.fa-rss(ng-class="{'fa-spin': section.loading}")

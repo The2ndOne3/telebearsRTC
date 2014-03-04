@@ -20,7 +20,10 @@
 
 @media only screen
   body
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif
+
+  h1, h2, h3, h4, h5, h6
+    font-family: 'Roboto', sans-serif
 
   a.logo
     display: inherit
@@ -48,7 +51,6 @@
       padding: 0 1em 0.5em 1em
 
   h3
-    margin-top: 0.5em
     margin-bottom: 0.125em
 
   .breadcrumbs
@@ -58,7 +60,7 @@
     padding: 0
 
     &>*
-      font-size: 0.75rem
+      font-size: 0.875rem
 
       &:before
         content: ">"
@@ -74,6 +76,9 @@
 
       &:before
         content: "|";
+
+      i#login-icon
+        padding-left: 0.25em
 
   form
     margin: 1em 0 0 0
@@ -164,6 +169,67 @@
       margin-bottom: 0.5rem
       color: #025d8c
 
+  form#settings
+    h6
+      margin-bottom: 1rem
+
+    a
+      font-size: 0.875em
+
+      i
+        margin-left: 0.5em
+
+    i.icon
+      width: 26px
+      text-align: center
+      font-size: 1.125em
+
+    hr
+      margin: 0.25rem 0 0.5rem 0
+
+    .detail
+      width: 90%;
+      font-size: 0.75em
+      color: #666
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      margin: 0;
+      height: 1rem;
+      padding-left: 0.75em
+
+      &.editable
+        background: #fff;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+        height: 2rem;
+
+    a.form-controls
+      display: inline-block
+      font-size: 0.75em
+      padding: 0.75em
+      margin: 1.25em 0.75em 0 0
+      border-radius: 3px
+
+      &.done
+        background: #024a70
+        color: #fff
+
+      &.cancel
+        background: #bbb
+        color: #444
+
+  li.subscribed
+    padding: 10px
+
+    i.fa-times-circle
+      color: #ee4545
+      font-size: 2em
+
+    p
+      font-size: 0.875em
+      margin: 0
+
   footer p
     font-size: 0.75em
     color: #666
@@ -181,7 +247,6 @@
     margin: 0 1.25em 1em 0
 
   h3
-    margin-top: 0.5em
     margin-bottom: 0.125em
 
   form
@@ -221,6 +286,7 @@
 @media only screen and (min-width: 64.063em)
   li.listing a:hover
     background: #f5eb7a
+
   table
     tr:hover, tr:nth-of-type(even):hover
       background: #f5eb7a
