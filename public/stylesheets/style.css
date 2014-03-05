@@ -296,14 +296,4 @@
   table tr.headings:hover {
     background: inherit;
   }
-  li.subscribed i.fa-times-circle {
-    color: #999;
-    font-size: 1.25em;
-  }
-  li.subscribed:hover {
-    background: #ececec;
-  }
-  li.subscribed:hover i.fa-times-circle {
-    color: #ee4545;
-  }
 }

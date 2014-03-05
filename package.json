@@ -1,16 +1,59 @@
 {
   "name": "TelebearsRTC",
+  "author": "Larry Xu <larry@larryxu.com>, Lehao Zhang <leo@lehaozhang.com>",
   "version": "1.0.2",
   "private": true,
+  "homepage": "https://github.com/The2ndOne3/telebearsRTC",
+  "bugs": "https://github.com/The2ndOne3/telebearsRTC/issues",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/The2ndOne3/telebearsRTC.git"
+  },
   "scripts": {
-    "start": "node app.js"
+    "start": "foreman start",
+    "postinstall": "bower install",
+    "test": "mocha --reporter spec"
   },
   "dependencies": {
-    "express": "3.3.4",
+    "underscore": "*",
+    "q": "*",
+
+    "express": "*",
+    "express-enrouten": "*",
+    "connect-flash": "*",
+    "helmet": "*",
+
     "jade": "*",
     "stylus": "*",
-    "mongojs": "*",
-    "cheerio": "*",
-    "request": "*"
+    "nib": "*",
+
+    "bower": "*",
+    "nodemon": "*",
+
+    "passport": "*",
+    "passport-local-mongoose": "*",
+    "connect-redis": "*",
+    "mongoose": "*",
+
+    "shortid": "*",
+    "moniker": "*",
+
+    "onceler": "*"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*",
+    "supertest": "*",
+
+    "grunt": "*",
+    "grunt-contrib-stylus": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-requirejs": "*",
+    "grunt-mocha-cli": "*",
+    "grunt-copy-to": "*"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
   }
 }

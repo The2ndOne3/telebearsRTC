@@ -1,1 +1,5 @@
 node_modules
+components
+dump
+config.json
+.env

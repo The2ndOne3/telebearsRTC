@@ -1,0 +1,13 @@
+{
+  "name": "telebears-rtc",
+  "version": "1.0.2",
+  "dependencies": {
+    "foundation": "*",
+    "font-awesome": "*",
+    "angular-latest": "*",
+    "typeahead.js": "*"
+  },
+  "resolutions": {
+    "jquery": ">= 2.0.0"
+  }
+}
