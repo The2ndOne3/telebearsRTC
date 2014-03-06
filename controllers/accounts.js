@@ -32,16 +32,21 @@ module.exports = function(app) {
       username: req.body.username,
       watching: []
     }), req.body.password, function(err, user) {
-      console.log(err);
-      if (err) {
+      if (err || !user) {
         return res.render('login', {
           title: 'Login',
           err: err.message
         });
       }
 
-      User.addEmail(req.body.email, function(err) {
-        res.redirect('/account');
+      user.addEmail(req.body.email, function(err) {
+        req.login(user, function(err) {
+          if (err) {
+            return console.error('[ERROR] Auth error', err);
+          }
+
+          res.redirect('/account');
+        });
       });
     });
   });
@@ -49,7 +54,7 @@ module.exports = function(app) {
 
   app.get('/account', function(req, res) {
     if (!req.user) {
-      res.redirect('/login');
+      return res.redirect('/login');
     }
 
     res.render('account', {
@@ -68,7 +73,7 @@ module.exports = function(app) {
   });
 
 
-  app.post('/subscribe/:ccn', function(req, res) {
+  app.get('/subscribe/:ccn', function(req, res) {
     if (!req.user) {
       return res.send(403);
     }
@@ -119,8 +124,8 @@ module.exports = function(app) {
       return res.send(403);
     }
 
-    User.find({username: req.user.username}, function(err, user) {
-      if (err) {
+    User.findOne({username: req.user.username}, function(err, user) {
+      if (err || !user) {
         console.error('[ERROR] User not found:', req.user, err);
         return res.send(500);
       }
@@ -156,8 +161,8 @@ module.exports = function(app) {
       return res.send(403);
     }
 
-    User.find({username: req.user.username}, function(err, user) {
-      if (err) {
+    User.findOne({username: req.user.username}, function(err, user) {
+      if (err || !user) {
         console.error('[ERROR] User not found:', req.user, err);
         return res.send(500);
       }
@@ -193,8 +198,8 @@ module.exports = function(app) {
       return res.send(403);
     }
 
-    User.find({username: req.user.username}, function(err, user) {
-      if (err) {
+    User.findOne({username: req.user.username}, function(err, user) {
+      if (err || !user) {
         console.error('[ERROR] User not found:', req.user, err);
         return res.send(500);
       }

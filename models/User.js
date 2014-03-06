@@ -39,7 +39,7 @@ var userSchema = mongoose.Schema({
   }]
 });
 
-userSchema.sendAlert = function() { // Should this have a callback? Pass it any errors that occur?
+userSchema.methods.sendAlert = function() { // Should this have a callback? Pass it any errors that occur?
   if (this.alerts.text) {
     ;
   }
@@ -49,7 +49,7 @@ userSchema.sendAlert = function() { // Should this have a callback? Pass it any 
   // TODO: send alerts to confirmed and active email/phones
 };
 
-userSchema.addEmail = function(email, callback) {
+userSchema.methods.addEmail = function(email, callback) {
   this.update({
     $push: {
       emails: {
@@ -62,7 +62,7 @@ userSchema.addEmail = function(email, callback) {
   // TODO: send confirmation email here.
 };
 
-userSchema.removeEmail = function(email, callback) {
+userSchema.methods.removeEmail = function(email, callback) {
   this.update({
     $pull: {
       emails: {
@@ -72,7 +72,7 @@ userSchema.removeEmail = function(email, callback) {
   }, callback);
 };
 
-userSchema.changeEmail = function(from, to, callback) {
+userSchema.methods.changeEmail = function(from, to, callback) {
   this.removeEmail(from, function(err, result) {
     if (err) {
       return callback(err, null);
@@ -81,7 +81,7 @@ userSchema.changeEmail = function(from, to, callback) {
   });
 };
 
-userSchema.confirmEmail = function(email, callback) {
+userSchema.methods.confirmEmail = function(email, callback) {
   this.update({
     emails: {
       address: email
@@ -92,7 +92,7 @@ userSchema.confirmEmail = function(email, callback) {
     }, callback);
 };
 
-userSchema.addPhone = function(phone, callback) {
+userSchema.methods.addPhone = function(phone, callback) {
   this.update({
     $push: {
       phone: {
@@ -105,7 +105,7 @@ userSchema.addPhone = function(phone, callback) {
   // TODO: send confirmation text here.
 };
 
-userSchema.removePhone = function(phone, callback) {
+userSchema.methods.removePhone = function(phone, callback) {
   this.update({
     $pull: {
       phone: {
@@ -115,7 +115,7 @@ userSchema.removePhone = function(phone, callback) {
   }, callback);
 };
 
-userSchema.changePhone = function(from, to, callback) {
+userSchema.methods.changePhone = function(from, to, callback) {
   this.removePhone(from, function(err, result) {
     if (err) {
       return callback(err, null);
@@ -124,7 +124,7 @@ userSchema.changePhone = function(from, to, callback) {
   });
 };
 
-userSchema.confirmEmail = function(phone, callback) {
+userSchema.methods.confirmEmail = function(phone, callback) {
   this.update({
     phone: {
       number: phone

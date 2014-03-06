@@ -4,9 +4,11 @@
 * Figure out email/text confirmation -- LOW PRIORITY
 * Add email/text confirmation endpoints -- LOW PRIORITY
 * Figure out phone number validation -- LOW PRIORITY
+* Add login validation (no 2 people can have same email, etc.)
 
 ## Larry
 * Hook up stuff
+* Add login validation on front-end (check for emails)
 
 # Tests (which we should automate)
 * Accounts API
