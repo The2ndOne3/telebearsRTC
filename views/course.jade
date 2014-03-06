@@ -36,7 +36,6 @@ block content
       table(ng-cloak)
         thead
           tr.headings
-            th Section
             th CCN
             th(ng-show="time") Time
             th(ng-show="location") Location
@@ -47,13 +46,12 @@ block content
             th
         tbody
           tr.table-row(ng-repeat="section in sections", ng-class='{filled: section.filled, hide: section.hide}')
-            td {{section.section}}
             td.ccn {{section.ccn}}
             td(ng-show="time") {{section.time}}
             td(ng-show="location") {{section.location}}
             td(ng-show="instructor") {{section.instructor}}
-            td(ng-show="enrollment") {{section.enrollment}}
-            td(ng-show="waitlist") {{section.waitlist}}
+            td(ng-show="enrollment") {{section.enrollment.current}}/{{section.enrollment.limit}}
+            td(ng-show="waitlist") {{section.waitlist.current}}/{{section.waitlist.limit}}
             td(ng-show="updated") {{section.date}}
             td
               //- if user is subscribed

@@ -66,6 +66,7 @@ module.exports = function(app) {
     }
 
     res.render('account', {
+      user: req.user,
       title: req.user.username,
       watching: req.user.watching.map(function(section) {
         return JSON.stringify({ccn: section.ccn});
