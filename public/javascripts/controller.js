@@ -95,17 +95,17 @@ app.controller('DataCtrl', function($scope, $http) {
     $http.get('/api/enrollment/'+ccn)
       .success(function(data) {
         $scope.sections[index].date = new Date().toLocaleString();
-        if(data.enroll != null) {
-          $scope.sections[index].enroll = data.enroll;
-          $scope.sections[index].enrollLimit = data.enrollLimit;
-          $scope.sections[index].enrollment = data.enroll + '/' + data.enrollLimit;
-          if(data.enroll == data.enrollLimit) {
+        if(data.enrollment != null) {
+          $scope.sections[index].enrollment.current = data.enrollment.current;
+          $scope.sections[index].enrollment.limit = data.enrollment.limit;
+          if(data.enrollment.current == data.enrollment.limit) {
             $scope.sections[index].filled = true;
             $scope.sections[index].hide = $scope.hide;
           }
         }
         if(data.waitlist != null)
-          $scope.sections[index].waitlist = data.waitlist + '/' + data.waitlistLimit;
+          $scope.sections[index].waitlist.current = data.waitlist.current;
+          $scope.sections[index].waitlist.limit = data.waitlist.limit;
         $scope.sections[index].loading = false;
       })
       .error(function(data) {
