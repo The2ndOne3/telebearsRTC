@@ -54,7 +54,8 @@ module.exports = function(app) {
 
     res.render('account', {
       user: req.user,
-      title: req.user.username
+      title: req.user.username,
+      angular: true
     });
   });
 
