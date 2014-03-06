@@ -68,19 +68,19 @@ app.controller('DataCtrl', function($scope, $http) {
     .success(function(data) {
       $scope.sections = data;
       $scope.loading = false;
+
+      if(subscriptions.length != 0) {
+        for(var i = 0; i < subscriptions.length; i++) {
+          angular.forEach($scope.sections, function(section, key) {
+            if(subscriptions[i].ccn == section.ccn)
+              section.watching = true;
+          });
+        }
+      }
     })
     .error(function(data) {
       console.log('Error: ' + data);
     });
-
-    if(subscriptions.length != 0) {
-      for(var i = 0; i < subscriptions.length; i++) {
-        angular.forEach($scope.sections, function(section, key) {
-          if(subscriptions[i].ccn == section.ccn)
-            section.watching = true;
-        });
-      }
-    }
   };
 
   $scope.loadAllData = function() {
