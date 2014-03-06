@@ -103,7 +103,6 @@ module.exports = function(app) {
         success: true
       });
 
-      // TODO: This polling stuff should be its own module.
       var request_url = [
         poll_url,
         '' + totp.now(),

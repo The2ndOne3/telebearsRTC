@@ -1,5 +1,7 @@
 var path = require('path')
 
+  , _ = require('underscore')
+
   , TOTP = require('onceler').TOTP
 
   , config = process.env
@@ -64,7 +66,24 @@ module.exports = function(app) {
 
     console.log('[DEBUG] Received update for class', req.params.ccn);
 
-    // TODO: send alerts.
-    User.find({})
+    User.find({
+      'watching.$.ccn': req.params.ccn
+    }, function(err, result) {
+      if (err) {
+        return console.error('[ERROR] Could not find users to update', err);
+      }
+      _.each(result, function(user) {
+        user.sendAlert(req.params.ccn, {
+          enrollment: {
+            current: req.params.enroll,
+            limit: req.params.enrollLimit
+          },
+          waitlist: {
+            current: req.params.waitlist,
+            limit: req.params.waitlistLimit
+          },
+        });
+      });
+    });
   });
 };

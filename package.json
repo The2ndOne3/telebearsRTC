@@ -38,7 +38,8 @@
     "moniker": "*",
 
     "onceler": "*",
-    "request": "*"
+    "request": "*",
+    "sendgrid": "*"
   },
   "devDependencies": {
     "mocha": "*",

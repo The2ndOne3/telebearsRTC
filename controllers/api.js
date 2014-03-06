@@ -42,15 +42,15 @@ module.exports = function(app){
         return get.enrollment(req.params.ccn, function(err, data) {
           section.enrollment = {
             current: data.enroll,
-            limit: data.enrollLimit,
-            updated: Date.now()
+            limit: data.enrollLimit
           };
 
           section.waitlist = {
             current: data.waitlist,
-            limit: data.waitlistLimit,
-            updated: Date.now()
+            limit: data.waitlistLimit
           };
+
+          section.updated = Date.now();
 
           section.save(function(err) {
             if (err) {
