@@ -1,6 +1,10 @@
 var mongoose = require('mongoose')
+  , _ = require('underscore')
+
   , shortid = require('shortid')
-  , moniker = require('moniker');
+  , moniker = require('moniker')
+
+  , request = require('request');
 
 var userSchema = mongoose.Schema({
   username: String,
@@ -39,9 +43,25 @@ var userSchema = mongoose.Schema({
   }]
 });
 
-userSchema.methods.sendAlert = function() { // Should this have a callback? Pass it any errors that occur?
+userSchema.methods.sendAlert = function(ccn, data) { // Should this have a callback? Pass it any errors that occur?
   if (this.alerts.text) {
-    ;
+    _.each(this.phone, function(ph) {
+      if (ph.confirmed || true) { // TODO: implement actual confirmations
+        // TODO: this alert stuff should be its own library I think maybe
+        var message = 'http://api.tropo.com/1.0/sessions?' +
+          'action=create' +
+          '&token=23c7ef4921f66e4eb92f03f594bad4fb02c28e7f3be95f3826983ee80a88ffb2e9af759a74922b9b55c135ce';
+
+        message += '&numberToDial=' + ph.number;
+        message += '&msg=' + 'Enrollment change for section ' +
+          ccn + ' ' + data.enrollment.current + '/' + data.enrollment.limit + ' students enrolled';
+        request(message, function(err, result) {
+          if (err) {
+            return console.error('[ERROR] Could not send text', err);
+          }
+        });
+      }
+    });
   }
   if (this.alerts.email) {
     ;

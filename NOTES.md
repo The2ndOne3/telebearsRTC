@@ -7,9 +7,10 @@
 * Add login validation (no 2 people can have same email, etc.) -- LOW PRIORITY
 * Separate polling into own module -- LOW PRIORITY
 * Implement unwatching to save resources -- LOW PRIORITY
-* Should we retry error requests on polling?
 * Refactor get.js to exclusively emit new datastructure -- LOW PRIORITY
-* Refactor alerts to its own thing -- LOW PRIORITY
+
+* Should we retry error requests on polling?
+* Refactor alerts to its own library?
 
 ## Larry
 * Hook up stuff

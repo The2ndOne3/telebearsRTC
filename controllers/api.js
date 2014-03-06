@@ -50,6 +50,12 @@ module.exports = function(app){
             limit: data.waitlistLimit
           };
 
+          section.save(function(err) {
+            if (err) {
+              return console.error('[ERROR] Could not update enrollment', err);
+            }
+          });
+
           res.set('Cache-Control','private');
           res.json(section);
         });

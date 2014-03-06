@@ -6,7 +6,8 @@ var path = require('path')
   , key = config.SECRET
 
   , totp = new TOTP(key, null, 60)
-  , Section = require(path.join('..', 'models', 'Section'));
+  , Section = require(path.join('..', 'models', 'Section'))
+  , User = require(path.join('..', 'models', 'User'));
 
 module.exports = function(app) {
   // Initialise enrollments because we don't want to initially pull ~8900 sections.
@@ -63,5 +64,6 @@ module.exports = function(app) {
     console.log('[DEBUG] Received update for class', req.params.ccn);
 
     // TODO: send alerts.
+
   });
 };
