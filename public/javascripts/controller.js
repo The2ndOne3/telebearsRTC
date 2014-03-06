@@ -122,10 +122,6 @@ app.controller('AcctCtrl', function($scope, $http) {
   $scope.subscriptions = [];
 
   $scope.init = function(subscriptions, email, mobile) {
-    console.log(subscriptions);
-    console.log(email);
-    console.log(mobile);
-    
     if(subscriptions.length == 0)
       $scope.noSubscriptions = true;
     else {
