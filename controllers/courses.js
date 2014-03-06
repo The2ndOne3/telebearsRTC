@@ -154,7 +154,8 @@ module.exports = function(app){
           res.render('course', { title: title, breadcrumbs: breadcrumbs, id: id, course: course,
             watching: req.user.watching.map(function(section) {
               return JSON.stringify({ccn: section.ccn});
-            })
+            }),
+            angular: true
           });
         }
       });

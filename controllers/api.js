@@ -2,6 +2,7 @@ var path = require('path')
 
   , mongoose = require('mongoose')
 
+  , get = require(path.join('..', 'lib', 'get'))
   , Section = require(path.join('..', 'models', 'Section'));
 
 module.exports = function(app){
@@ -31,11 +32,31 @@ module.exports = function(app){
 
   app.get('/api/enrollment/:ccn', function(req, res) {
     Section.findOne({ccn: req.params.ccn}, function(err, section) {
-      if(err){
+      if (err){
         console.error('[API ERROR]', err);
       }
-      res.set('Cache-Control','private');
-      res.json(section);
+      if (section.enrollment.current === 0 &&
+          section.enrollment.limit === 0 &&
+          section.waitlist.current === 0 &&
+          section.waitlist.limit === 0) {
+        return get.enrollment(req.params.ccn, function(err, data) {
+          section.enrollment = {
+            current: data.enroll,
+            limit: data.enrollLimit
+          };
+
+          section.waitlist = {
+            current: data.waitlist,
+            limit: data.waitlistLimit
+          };
+
+          res.set('Cache-Control','private');
+          res.json(data);
+        });
+      } else {
+        res.set('Cache-Control','private');
+        res.json(section);
+      }
     });
   });
 };
