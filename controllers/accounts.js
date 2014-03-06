@@ -53,8 +53,16 @@ module.exports = function(app) {
     }
 
     res.render('account', {
-      user: req.user,
       title: req.user.username,
+      watching: req.user.watching.map(function(section) {
+        return JSON.stringify({ccn: section.ccn});
+      }),
+      emails: req.user.emails.map(function(email) {
+        return JSON.stringify({address: email.address});
+      }),
+      phone: req.user.phone.map(function(phone) {
+        return JSON.stringify({number: phone.number});
+      }),
       angular: true
     });
   });

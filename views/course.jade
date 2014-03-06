@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .row(ng-controller="DataCtrl" ng-init="init('#{id}','#{course}')")
+  .row(ng-controller="DataCtrl" ng-init="init('#{id}','#{course}', [#{user.watching}])")
     .large-12.columns
       .controls(ng-show="loading")
         | Loading sections ... 
