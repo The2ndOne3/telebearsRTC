@@ -42,13 +42,13 @@ html(class='no-js', lang='en', ng-app="enrollmentApp")
             if !locals.user
               li
                 a(href='/login') Login
-                  i#login-icon.fa.fa-arrow-circle-right
+                  i.login-icon.fa.fa-arrow-circle-right
             else
               li
                 a(href='/account') Account
               li
                 a(href='/logout') Logout
-                  i#logout-icon.fa.fa-arrow-circle-right
+                  i.logout-icon.fa.fa-arrow-circle-right
         form#search-form(action='/search', method='get')
           .row.collapse
             .small-10.columns

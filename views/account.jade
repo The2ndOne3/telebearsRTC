@@ -12,7 +12,8 @@ block content
           hr
           a.right(ng-show="editing && !noEmail", ng-click="remove('email')")
             i.fa.fa-times-circle
-          input.detail(type="text", ng-show="!noEmail", ng-model="email", ng-disabled="!editing", ng-class="{editable: editing}")
+          input.detail(type="text", ng-show="editing && !noEmail", ng-model="email", ng-class="{editable: editing}")
+          .detail(ng-show="!editing && !noEmail") {{email}}
           a.right(ng-show="editing && noEmail", ng-click="add('email')")
             i.fa.fa-plus
           .detail(ng-show="noEmail") Not specified
@@ -22,7 +23,8 @@ block content
           hr
           a.right(ng-show="editing && !noMobile", ng-click="remove('mobile')")
             i.fa.fa-times-circle
-          input.detail(type="text", ng-show="!noMobile", ng-model="mobile", ng-disabled="!editing", ng-class="{editable: editing}")
+          input.detail(type="text", ng-show="editing && !noMobile", ng-model="mobile", ng-class="{editable: editing}")
+          .detail(ng-show="!editing && !noMobile") {{mobile}}
           a.right(ng-show="editing && noMobile", ng-click="add('mobile')")
             i.fa.fa-plus
           .detail(ng-show="noMobile") Not specified

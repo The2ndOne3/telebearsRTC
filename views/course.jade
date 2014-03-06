@@ -55,9 +55,9 @@ block content
             td(ng-show="updated") {{section.date}}
             td
               //- if user is subscribed
-              i.fa.fa-check(ng-show="section.watching") 
+              i.fa.fa-check.sub(ng-show="section.watching", title="Subscribed") 
               //- else
               a(ng-show="!section.watching" ng-click='subscribe(section.ccn)', title="Subscribe")
-                i.fa.fa-rss
+                i.fa.fa-rss.sub
               a(ng-click='loadData(section.index,section.ccn)', title="Update")
                 i.fa.fa-refresh(ng-class="{'fa-spin': section.loading}")

@@ -96,7 +96,7 @@ app.controller('DataCtrl', function($scope, $http) {
         section.loading = true;
         $http.get('/api/enrollment/'+ccn)
         .success(function(data) {
-          section.date = new Date().toLocaleString();
+          section.updated = data.updated;
           if(data.enrollment != null) {
             section.enrollment.current = data.enrollment.current;
             section.enrollment.limit = data.enrollment.limit;
@@ -239,7 +239,7 @@ app.controller('AcctCtrl', function($scope, $http) {
     $scope.editing = false;
   }
 
-  function saveField(field, current, saved, non, savedNon, field) {
+  function saveField(field, current, saved, non, savedNon) {
     if(saved != current) {
       if(non) {
         //api call to delete email
