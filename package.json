@@ -39,6 +39,7 @@
 
     "onceler": "*",
     "request": "*",
+    "cheerio": "*",
     "sendgrid": "*"
   },
   "devDependencies": {
