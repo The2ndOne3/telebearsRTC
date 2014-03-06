@@ -44,7 +44,7 @@ Tropo (Tropo)
 
 ## Polling
 NodeJS
-<!-- Redis (RedisToGo) -->
+Redis (RedisToGo)
 
 # Future features
 * Multiple email/text support on front-end

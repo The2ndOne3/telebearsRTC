@@ -11,8 +11,10 @@ var path = require('path')
 module.exports = function(app) {
   // Initialise enrollments because we don't want to initially pull ~8900 sections.
   app.post('/poll/:key/:ccn/:enroll/:enrollLimit/:waitlist/:waitlistLimit/:init', function(req, res) {
-    if (!totp.verify(req.params.key)) {
-      return res.send(403);
+    if (config.NODE_ENV == 'production') {
+      if (!totp.verify(req.params.key)) {
+        return res.send(403);
+      }
     }
 
     Section.update({
