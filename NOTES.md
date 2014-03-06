@@ -7,6 +7,7 @@
 * Add login validation (no 2 people can have same email, etc.) -- LOW PRIORITY
 * Separate polling into own module -- LOW PRIORITY
 * Implement unwatching to save resources -- LOW PRIORITY
+* Should we retry error requests on polling?
 
 ## Larry
 * Hook up stuff
