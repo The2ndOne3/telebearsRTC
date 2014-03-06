@@ -37,7 +37,8 @@
     "shortid": "*",
     "moniker": "*",
 
-    "onceler": "*"
+    "onceler": "*",
+    "request": "*"
   },
   "devDependencies": {
     "mocha": "*",

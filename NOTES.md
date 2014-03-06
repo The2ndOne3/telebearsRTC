@@ -4,7 +4,9 @@
 * Figure out email/text confirmation -- LOW PRIORITY
 * Add email/text confirmation endpoints -- LOW PRIORITY
 * Figure out phone number validation -- LOW PRIORITY
-* Add login validation (no 2 people can have same email, etc.)
+* Add login validation (no 2 people can have same email, etc.) -- LOW PRIORITY
+* Separate polling into own module -- LOW PRIORITY
+* Implement unwatching to save resources -- LOW PRIORITY
 
 ## Larry
 * Hook up stuff

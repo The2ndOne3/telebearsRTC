@@ -2,9 +2,17 @@ var path = require('path')
 
   , mongoose = require('mongoose')
   , passport = require(path.join('..', 'lib', 'auth'))
+  , request = require('request')
+  , TOTP = require('onceler').TOTP
+
+  , config = process.env
+  , poll_url = config.TARGET
+  , key = config.SECRET
 
   , User = require(path.join('..', 'models', 'User'))
   , Section = require(path.join('..', 'models', 'Section'));
+
+var totp = new TOTP(key, null, 60);
 
 module.exports = function(app) {
   app.get('/login', function(req, res) {
@@ -73,7 +81,7 @@ module.exports = function(app) {
   });
 
 
-  app.get('/subscribe/:ccn', function(req, res) {
+  app.post('/subscribe/:ccn', function(req, res) {
     if (!req.user) {
       return res.send(403);
     }
@@ -92,6 +100,20 @@ module.exports = function(app) {
 
       res.send(200, {
         success: true
+      });
+
+      // TODO: This polling stuff should be its own module.
+      var request_url = [
+        poll_url,
+        '' + totp.now(),
+        req.params.ccn,
+      ].join('/');
+
+      request.post(request_url, function(err, res, body) {
+        if (err) {
+          return console.error('[ERROR] API connection error to', request_url, err);
+        }
+        console.log('[DEBUG] Requesting watch on', req.params.ccn);
       });
     });
   });
