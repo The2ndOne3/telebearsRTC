@@ -49,14 +49,13 @@ module.exports = function(app) {
     }, {
       enrollment: {
         current: req.params.enroll,
-        limit: req.params.enrollLimit,
-        updated: Date.now()
+        limit: req.params.enrollLimit
       },
       waitlist: {
         current: req.params.waitlist,
-        limit: req.params.waitlistLimit,
-        updated: Date.now()
-      }
+        limit: req.params.waitlistLimit
+      },
+      updated: Date.now()
     }, function(err, result) {
       if (err) {
         console.error('[ERROR] Polling update error for class', req.params.ccn, err);
@@ -66,6 +65,6 @@ module.exports = function(app) {
     console.log('[DEBUG] Received update for class', req.params.ccn);
 
     // TODO: send alerts.
-
+    User.find({})
   });
 };

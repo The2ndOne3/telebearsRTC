@@ -17,10 +17,6 @@ var sectionSchema = mongoose.Schema({
     limit: {
       type: Number,
       default: 0
-    },
-    updated: {
-      type: Number,
-      default: 0
     }
   },
 
@@ -32,12 +28,10 @@ var sectionSchema = mongoose.Schema({
     limit: {
       type: Number,
       default: 0
-    },
-    updated: {
-      type: Number,
-      default: 0
     }
-  }
+  },
+
+  updated: Number
 });
 
 module.exports = mongoose.model('Section', sectionSchema);
