@@ -122,11 +122,15 @@ app.controller('AcctCtrl', function($scope, $http) {
   $scope.subscriptions = [];
 
   $scope.init = function(subscriptions, email, mobile) {
+    console.log(subscriptions);
+    console.log(email);
+    console.log(mobile);
+    
     if(subscriptions.length == 0)
       $scope.noSubscriptions = true;
-    else
-      for(course in subscriptions) {
-        $http.get('/api/section/'+course.ccn)
+    else {
+      for(var i = 0; i < subscriptions.length; i++) {
+        $http.get('/api/section/'+subscriptions[i].ccn)
         .success(function(data) {
           $scope.subscriptions.push(data);
         })
@@ -134,20 +138,19 @@ app.controller('AcctCtrl', function($scope, $http) {
           console.log('Error: ' + data);
         });
       }
-    if(email.length == 0)
+    }
+    if(email.length == 0) {
       $scope.email = '';
+      $scope.noEmail = true;
+    }
     else
       $scope.email = email[0].address;
-    if(mobile.length == 0)
+    if(mobile.length == 0) {
       $scope.mobile = '';
+      $scope.noMobile = true;
+    }
     else
       $scope.mobile = mobile[0].number;
-
-    if(email == '')
-      $scope.noEmail = true;
-    if(mobile == '')
-      $scope.noMobile = true;
-
 
     $scope.saved.email = email;
     $scope.saved.mobile = mobile;
