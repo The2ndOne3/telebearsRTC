@@ -51,7 +51,8 @@ module.exports = function(app) {
       res.redirect('/login');
     }
     res.render('account', {
-      user: req.user
+      user: req.user,
+      title: req.user.username
     });
   });
 
