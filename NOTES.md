@@ -7,6 +7,7 @@
 * Add subscribing endpoint -- DONE
 * Add update user info endpoint -- DONE
 * Figure out polling -- DONE
+* Test key locking of polling updates
 
 ## Larry
 * Fix login view -- DONE
