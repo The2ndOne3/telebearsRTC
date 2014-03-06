@@ -1,18 +1,29 @@
 # TODO
 ## Leo
+* Figure out alerts
+* Test key locking of polling updates
+
 * Figure out email/text confirmation -- LOW PRIORITY
 * Add email/text confirmation endpoints -- LOW PRIORITY
-* Figure out alerts
 * Figure out phone number validation -- LOW PRIORITY
-* Add subscribing endpoint -- DONE
-* Add update user info endpoint -- DONE
-* Figure out polling -- DONE
-* Test key locking of polling updates
 
 ## Larry
 * Fix login view -- DONE
 * Fix layout top bar -- DONE
 * Hook up stuff -- DONE
+
+# Tests (which we should automate)
+* Accounts
+  * subscribe (works)
+  * unsubscribe (works)
+  * add info ??
+  * update info ??
+  * remove info (currently unsupported)
+* Polling
+  * listen (works)
+  * key locking (works)
+* Alerts
+  * 
 
 # Services
 ## Main

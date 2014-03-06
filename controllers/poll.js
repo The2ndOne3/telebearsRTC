@@ -5,15 +5,15 @@ var path = require('path')
   , config = process.env
   , key = config.SECRET
 
-  , totp = new TOTP(key)
+  , totp = new TOTP(key, null, 60)
   , Section = require(path.join('..', 'models', 'Section'));
 
 module.exports = function(app) {
   // Initialise enrollments because we don't want to initially pull ~8900 sections.
   app.post('/poll/:key/:ccn/:enroll/:enrollLimit/:waitlist/:waitlistLimit/:init', function(req, res) {
-    // if (!totp.verify(req.params.key)) {
-    //   return res.send(403);
-    // }
+    if (!totp.verify(req.params.key)) {
+      return res.send(403);
+    }
 
     Section.update({
       ccn: req.params.ccn
@@ -37,9 +37,9 @@ module.exports = function(app) {
 
   // Update enrollments.
   app.post('/poll/:key/:ccn/:enroll/:enrollLimit/:waitlist/:waitlistLimit', function(req, res) {
-    // if (!totp.verify(req.params.key)) {
-    //   return res.send(403);
-    // }
+    if (!totp.verify(req.params.key)) {
+      return res.send(403);
+    }
 
     Section.update({
       ccn: req.params.ccn
