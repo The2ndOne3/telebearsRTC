@@ -49,11 +49,13 @@ module.exports = function(app) {
     }, {
       enrollment: {
         current: req.params.enroll,
-        limit: req.params.enrollLimit
+        limit: req.params.enrollLimit,
+        updated: Date.now()
       },
       waitlist: {
         current: req.params.waitlist,
-        limit: req.params.waitlistLimit
+        limit: req.params.waitlistLimit,
+        updated: Date.now()
       }
     }, function(err, result) {
       if (err) {

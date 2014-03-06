@@ -17,7 +17,8 @@ var sectionSchema = mongoose.Schema({
     limit: {
       type: Number,
       default: 0
-    }
+    },
+    updated: Number
   },
 
   waitlist: {
@@ -28,7 +29,8 @@ var sectionSchema = mongoose.Schema({
     limit: {
       type: Number,
       default: 0
-    }
+    },
+    updated: Number
   }
 });
 
