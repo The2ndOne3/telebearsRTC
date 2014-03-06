@@ -9,8 +9,9 @@
 * Figure out polling -- DONE
 
 ## Larry
-* Fix login view
-* Fix layout top bar
+* Fix login view -- DONE
+* Fix layout top bar -- DONE
+* Hook up stuff -- DONE
 
 # Services
 ## Main
@@ -22,4 +23,10 @@ Tropo (Tropo)
 
 ## Polling
 NodeJS
-Redis (RedisToGo)
+<!-- Redis (RedisToGo) -->
+
+# Future features
+* Multiple email/text support on front-end
+* Rebuild polling server to use Intercom (or roll own IPC)
+* Add failure resistance to polling server (store the list of CCNs to pull out of memory, maybe in Redis?)
+* Build public API
