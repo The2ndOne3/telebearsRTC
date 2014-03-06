@@ -151,7 +151,11 @@ module.exports = function(app){
         } else if(department.length < 1) {
           res.render('404', { title: 'Errorrrrrrrr', user: req.user });
         } else {
-          res.render('course', { title: title, breadcrumbs: breadcrumbs, id: id, course: course, user: req.user });
+          res.render('course', { title: title, breadcrumbs: breadcrumbs, id: id, course: course,
+            watching: req.user.watching.map(function(section) {
+              return JSON.stringify({ccn: section.ccn});
+            })
+          });
         }
       });
   });
