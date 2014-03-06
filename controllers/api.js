@@ -20,7 +20,7 @@ module.exports = function(app){
   app.get('/api/sections/:id/:course', function(req, res){
     var id = req.params.id
       , course = req.params.course;
-    Section.find({classId: id + ' ' + course}, function(err, sections) {
+    Section.find({classId: id.toUpperCase() + ' ' + course.toUpperCase()}, function(err, sections) {
       if(err){
         console.error('[API ERROR]', err);
       }
