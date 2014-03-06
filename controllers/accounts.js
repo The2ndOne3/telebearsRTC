@@ -3,7 +3,8 @@ var path = require('path')
   , mongoose = require('mongoose')
   , passport = require(path.join('..', 'lib', 'auth'))
 
-  , User = require(path.join('..', 'models', 'User'));
+  , User = require(path.join('..', 'models', 'User'))
+  , Section = require(path.join('..', 'models', 'Section'));
 
 module.exports = function(app) {
   app.get('/login', function(req, res) {
@@ -50,6 +51,7 @@ module.exports = function(app) {
     if (!req.user) {
       res.redirect('/login');
     }
+
     res.render('account', {
       user: req.user,
       title: req.user.username

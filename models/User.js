@@ -39,10 +39,20 @@ var userSchema = mongoose.Schema({
   }]
 });
 
+userSchema.sendAlert = function() { // Should this have a callback? Pass it any errors that occur?
+  if (this.alerts.text) {
+    ;
+  }
+  if (this.alerts.email) {
+    ;
+  }
+  // TODO: send alerts to confirmed and active email/phones
+};
+
 userSchema.addEmail = function(email, callback) {
   this.update({
     $push: {
-      'emails': {
+      emails: {
         address: email,
         token: shortid.generate(),
         confirmed: false
@@ -55,7 +65,7 @@ userSchema.addEmail = function(email, callback) {
 userSchema.removeEmail = function(email, callback) {
   this.update({
     $pull: {
-      'emails': {
+      emails: {
         address: email
       }
     }
@@ -71,10 +81,21 @@ userSchema.changeEmail = function(from, to, callback) {
   });
 };
 
+userSchema.confirmEmail = function(email, callback) {
+  this.update({
+    emails: {
+      address: email
+    }}, {
+      $set: {
+        'emails.$.confirmed': true
+      }
+    }, callback);
+};
+
 userSchema.addPhone = function(phone, callback) {
   this.update({
     $push: {
-      'phone': {
+      phone: {
         number: phone,
         token: moniker.choose(),
         confirmed: false
@@ -87,7 +108,7 @@ userSchema.addPhone = function(phone, callback) {
 userSchema.removePhone = function(phone, callback) {
   this.update({
     $pull: {
-      'phone': {
+      phone: {
         number: phone
       }
     }
@@ -101,6 +122,17 @@ userSchema.changePhone = function(from, to, callback) {
     }
     this.addPhone(to, callback);
   });
+};
+
+userSchema.confirmEmail = function(phone, callback) {
+  this.update({
+    phone: {
+      number: phone
+    }}, {
+      $set: {
+        'phone.$.confirmed': true
+      }
+    }, callback);
 };
 
 userSchema.plugin(require('passport-local-mongoose'));
