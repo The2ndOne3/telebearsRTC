@@ -51,7 +51,7 @@ module.exports = function(app){
           };
 
           res.set('Cache-Control','private');
-          res.json(data);
+          res.json(section);
         });
       } else {
         res.set('Cache-Control','private');

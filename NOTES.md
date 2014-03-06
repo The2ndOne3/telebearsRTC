@@ -9,6 +9,7 @@
 * Implement unwatching to save resources -- LOW PRIORITY
 * Should we retry error requests on polling?
 * Refactor get.js to exclusively emit new datastructure -- LOW PRIORITY
+* Refactor alerts to its own thing -- LOW PRIORITY
 
 ## Larry
 * Hook up stuff
