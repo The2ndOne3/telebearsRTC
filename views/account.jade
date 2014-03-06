@@ -1,7 +1,7 @@
 extends layout
 
 block content
-  .row(ng-controller="AcctCtrl", ng-init="init(#{user.watching}, #{user.emails}, #{user.phone})")
+  .row(ng-controller="AcctCtrl", ng-init="init([#{user.watching}], [#{user.emails}], [#{user.phone}])")
     .large-3.large-push-9.columns
       .panel
         form#settings
