@@ -91,31 +91,35 @@ app.controller('DataCtrl', function($scope, $http) {
   };
 
   $scope.loadData = function(index, ccn) {
-    $scope.sections[index].loading = true;
-    $http.get('/api/enrollment/'+ccn)
-      .success(function(data) {
-        $scope.sections[index].date = new Date().toLocaleString();
-        if(data.enrollment != null) {
-          $scope.sections[index].enrollment.current = data.enrollment.current;
-          $scope.sections[index].enrollment.limit = data.enrollment.limit;
-          if(data.enrollment.current == data.enrollment.limit) {
-            $scope.sections[index].filled = true;
-            $scope.sections[index].hide = $scope.hide;
+    angular.forEach($scope.sections, function(section, key) {
+      if(section.ccn == ccn) {
+        section.loading = true;
+        $http.get('/api/enrollment/'+ccn)
+        .success(function(data) {
+          section.date = new Date().toLocaleString();
+          if(data.enrollment != null) {
+            section.enrollment.current = data.enrollment.current;
+            section.enrollment.limit = data.enrollment.limit;
+            if(data.enrollment.current == data.enrollment.limit) {
+              section.filled = true;
+              section.hide = $scope.hide;
+            }
           }
-        }
-        if(data.waitlist != null)
-          $scope.sections[index].waitlist.current = data.waitlist.current;
-          $scope.sections[index].waitlist.limit = data.waitlist.limit;
-        $scope.sections[index].loading = false;
-      })
-      .error(function(data) {
-        console.log('Error: ' + data);
-      });
+          if(data.waitlist != null)
+            section.waitlist.current = data.waitlist.current;
+            section.waitlist.limit = data.waitlist.limit;
+          section.loading = false;
+        })
+        .error(function(data) {
+          console.log('Error: ' + data);
+        });
+      }
+    });
   };
 
   $scope.toggleHide = function() {
     angular.forEach($scope.sections, function(section, key) {
-      if(section.enroll != null && section.enrollLimit != null && section.enroll == section.enrollLimit) {
+      if(section.enrollment.current != null && section.enrollment.limit != null && section.enrollment.current == section.enrollment.limit) {
         section.hide = !$scope.hide;
       }
     });
@@ -125,6 +129,11 @@ app.controller('DataCtrl', function($scope, $http) {
     $http.post('/subscribe/'+ccn)
     .success(function(data) {
       console.log('Suscribed to section '+ccn);
+      angular.forEach($scope.sections, function(section, key) {
+        if(section.ccn == ccn) {
+          section.watching = true;
+        }
+      });
     })
     .error(function(data) {
       console.log('Error: ' + data);
@@ -164,6 +173,11 @@ app.controller('AcctCtrl', function($scope, $http) {
       $scope.noMobile = true;
     else
       $scope.mobile = mobile[0].number;
+
+    console.log($scope.email);
+    console.log($scope.mobile);
+    console.log($scope.noEmail);
+    console.log($scope.noMobile);
 
     $scope.saved.email = $scope.email;
     $scope.saved.mobile = $scope.mobile;
