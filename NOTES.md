@@ -1,29 +1,38 @@
 # TODO
 ## Leo
 * Figure out alerts
-* Test key locking of polling updates
-
 * Figure out email/text confirmation -- LOW PRIORITY
 * Add email/text confirmation endpoints -- LOW PRIORITY
 * Figure out phone number validation -- LOW PRIORITY
 
 ## Larry
-* Fix login view -- DONE
-* Fix layout top bar -- DONE
-* Hook up stuff -- DONE
+* Hook up stuff
 
 # Tests (which we should automate)
-* Accounts
+* Accounts API
   * subscribe (works)
   * unsubscribe (works)
   * add info ??
   * update info ??
   * remove info (currently unsupported)
-* Polling
+* Polling API
   * listen (works)
   * key locking (works)
+* Confirmation (currently unsupported)
+  * email confirmation sent
+  * email token works
+  * text confirmation sent
+  * text confirmation works
 * Alerts
-  * 
+  * email alerts work
+  * text alerts work
+* UI
+  * subscribing ??
+  * unsubscribing ??
+  * account dashboard ??
+  * adding info ??
+  * changing info ??
+  * removing info (currently unsupported)
 
 # Services
 ## Main
