@@ -30,12 +30,13 @@ block content
           a.form-controls.cancel(ng-show="editing", ng-click="cancel()") Cancel
     .large-9.large-pull-3.columns
       h4 Subscribed courses
-      //if no subscribed courses
-      .alert-box.info(ng-show="noSubscriptions") You are currently not subscribed to any courses. Search for courses that you want to receive enrollment updates on.
-      //else
-      ul.no-bullet
-        li.subscribed(ng-repeat="subscription in subscriptions", ng-hide="subscription.hide")
-          a.right(ng-click="removeSection(subscription.ccn)" title="Remove")
-            i.fa.fa-times-circle
-          h5 {{subscription.classId}}
-          p CCN: {{subscription.ccn}}, Instructor: {{subscription.instructor}}, Time: {{subscription.time}}, Location: {{subscription.location}}, Enrollment: {{subscription.enrollment.current}}/{{subscription.enrollment.limit}}, Waitlist: {{subscription.waitlist.current}}/{{subscription.waitlist.limit}}
+      div(ng-cloak)
+        //if no subscribed courses
+        .alert-box.info(ng-show="noSubscriptions") You are currently not subscribed to any courses. Search for courses that you want to receive enrollment updates on.
+        //else
+        ul.no-bullet
+          li.subscribed(ng-repeat="subscription in subscriptions", ng-hide="subscription.hide")
+            a.right(ng-click="removeSection(subscription.ccn)" title="Remove")
+              i.fa.fa-times-circle
+            h5 {{subscription.classId}}
+            p CCN: {{subscription.ccn}}, Instructor: {{subscription.instructor}}, Time: {{subscription.time}}, Location: {{subscription.location}}, Enrollment: {{subscription.enrollment.current}}/{{subscription.enrollment.limit}}, Waitlist: {{subscription.waitlist.current}}/{{subscription.waitlist.limit}}

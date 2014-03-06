@@ -63,15 +63,24 @@ app.controller('DataCtrl', function($scope, $http) {
     $scope.$apply();
   });
 
-  $scope.init = function(id, course) {
+  $scope.init = function(id, course, subscriptions) {
     $http.get('/api/sections/'+id+'/'+course)
-      .success(function(data) {
-        $scope.sections = data;
-        $scope.loading = false;
-      })
-      .error(function(data) {
-        console.log('Error: ' + data);
-      });
+    .success(function(data) {
+      $scope.sections = data;
+      $scope.loading = false;
+    })
+    .error(function(data) {
+      console.log('Error: ' + data);
+    });
+
+    if(subscriptions.length != 0) {
+      for(var i = 0; i < subscriptions.length; i++) {
+        angular.forEach($scope.sections, function(section, key) {
+          if(subscriptions[i].ccn == section.ccn)
+            section.watching = true;
+        });
+      }
+    }
   };
 
   $scope.loadAllData = function() {
@@ -111,9 +120,21 @@ app.controller('DataCtrl', function($scope, $http) {
       }
     });
   };
+
+  $scope.subscribe = function(ccn) {
+    $http.post('/subscribe/'+ccn)
+    .success(function(data) {
+      console.log('Suscribed to section '+ccn);
+    })
+    .error(function(data) {
+      console.log('Error: ' + data);
+    });
+  }
 });
 
 app.controller('AcctCtrl', function($scope, $http) {
+  $scope.email = '';
+  $scope.mobile = '';
   $scope.noEmail = false;
   $scope.noMobile = false;
   $scope.editing = false;
@@ -135,21 +156,17 @@ app.controller('AcctCtrl', function($scope, $http) {
         });
       }
     }
-    if(email.length == 0) {
-      $scope.email = '';
+    if(email.length == 0)
       $scope.noEmail = true;
-    }
     else
       $scope.email = email[0].address;
-    if(mobile.length == 0) {
-      $scope.mobile = '';
+    if(mobile.length == 0)
       $scope.noMobile = true;
-    }
     else
       $scope.mobile = mobile[0].number;
 
-    $scope.saved.email = email;
-    $scope.saved.mobile = mobile;
+    $scope.saved.email = $scope.email;
+    $scope.saved.mobile = $scope.mobile;
     $scope.saved.noEmail = $scope.noEmail;
     $scope.saved.noMobile = $scope.noMobile;
   }
@@ -199,38 +216,6 @@ app.controller('AcctCtrl', function($scope, $http) {
 
   $scope.save = function() {
     // insert query to save new settings
-    if($scope.saved.email != $scope.email) {
-      if($scope.noEmail) {
-        //api call to delete email
-        $http.delete('/account/email/'+$scope.saved.email)
-        .success(function(){
-          console.log('Email deleted successfully');
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
-        });
-      }
-      else if($scope.saved.noEmail) {
-        // api call to create email
-        $http.post('/account/email/'+$scope.email)
-        .success(function(){
-          console.log('Email posted successfully');
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
-        });
-      }
-      else {
-        // api call to update email
-        $http.put('/account/email/'+$scope.email)
-        .success(function(){
-          console.log('Email updated successfully');
-        })
-        .error(function(data) {
-          console.log('Error: ' + data);
-        });
-      }
-    }
     saveField('email', $scope.email, $scope.saved.email, $scope.noEmail, $scope.saved.noEmail);
     saveField('mobile', $scope.mobile, $scope.saved.mobile, $scope.noMobile, $scope.saved.noMobile);
     $scope.saved.email = $scope.email;
