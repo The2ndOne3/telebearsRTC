@@ -18,7 +18,10 @@ var sectionSchema = mongoose.Schema({
       type: Number,
       default: 0
     },
-    updated: Number
+    updated: {
+      type: Number,
+      default: 0
+    }
   },
 
   waitlist: {
@@ -30,7 +33,10 @@ var sectionSchema = mongoose.Schema({
       type: Number,
       default: 0
     },
-    updated: Number
+    updated: {
+      type: Number,
+      default: 0
+    }
   }
 });
 
